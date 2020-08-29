@@ -1,0 +1,16 @@
+[
+{
+  "modid": "jbplus",
+  "name": "JointBlockPlus",
+  "description": "JointBlock Addon mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["firis-games"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
