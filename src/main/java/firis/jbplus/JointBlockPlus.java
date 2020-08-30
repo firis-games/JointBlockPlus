@@ -9,9 +9,11 @@ import org.apache.logging.log4j.Logger;
 import firis.jbplus.api.JointBlockPlusAPI;
 import firis.jbplus.common.action.JBPHarvesterAction;
 import firis.jbplus.common.action.JBPPlantAction;
+import firis.jbplus.common.action.JBPVacuumAction;
 import firis.jbplus.common.action.factory.JBPlusActionFactory;
 import firis.jbplus.common.item.JBPItemHarvester;
 import firis.jbplus.common.item.JBPItemPlanter;
+import firis.jbplus.common.item.JBPItemVacuum;
 import jp.mc.ancientred.jointblock.config.JBConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -54,14 +56,15 @@ public class JointBlockPlus {
     public static Logger logger = LogManager.getLogger(MODID);
     
     /** proxy */
-//    @SidedProxy(serverSide = "firis.lmavatar.common.proxy.CommonProxy", 
-//   		clientSide = "firis.lmavatar.client.proxy.ClientProxy")
+//    @SidedProxy(serverSide = "firis.jbplus.common.proxy.CommonProxy", 
+//   		clientSide = "firis.jbplus.client.proxy.ClientProxy")
 //	public static IProxy proxy;
     
     @ObjectHolder(MODID)
     public static class JBPItems {
     	public final static Item MODEL_PLANTER_F = null;
     	public final static Item MODEL_HARVESTER_F = null;
+    	public final static Item MODEL_VACUUM_F = null;
     }
     
     @EventHandler
@@ -73,6 +76,7 @@ public class JointBlockPlus {
     	//Actionクラスを登録
     	JointBlockPlusAPI.registerActionHandler("plant_f", JBPPlantAction.class);
     	JointBlockPlusAPI.registerActionHandler("harvest_f", JBPHarvesterAction.class);
+    	JointBlockPlusAPI.registerActionHandler("vacuum_f", JBPVacuumAction.class);
     	
     	//描画設定を強制的に変更する
     	JBConfig.bypathEJRenderByStickyTileEntity = false;
@@ -101,6 +105,11 @@ public class JointBlockPlus {
     	event.getRegistry().register(new JBPItemHarvester()
     			.setRegistryName(MODID, "model_harvester_f")
     			.setUnlocalizedName("model_harvester_f"));
+    	
+    	//F型バキューム
+    	event.getRegistry().register(new JBPItemVacuum()
+    			.setRegistryName(MODID, "model_vacuum_f")
+    			.setUnlocalizedName("model_vacuum_f"));
     	
     }
     

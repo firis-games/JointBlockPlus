@@ -3,6 +3,7 @@ package firis.jbplus.common.action;
 import java.util.Map;
 
 import firis.jbplus.api.action.IJBPlusActionHandler;
+import firis.jbplus.common.helper.JBPlusHelper;
 import jp.mc.ancientred.jointblock.api.IJBEntityState;
 import jp.mc.ancientred.jointblock.api.IJBJointParameterHolder;
 import jp.mc.ancientred.jointblock.api.IJBVectorTransformer;
@@ -23,26 +24,12 @@ public abstract class JBPBlockActionBase implements IJBPlusActionHandler {
 	protected float useEnergy = 0.5F;
 	
 	/**
-	 * float型へ変換
-	 * @param value
-	 * @param defVal
-	 * @return
-	 */
-	protected float parseFloat(Object value, float defVal) {
-		float fVal = defVal;
-		if (value instanceof Float) {
-			fVal = (float) value;
-		}
-		return fVal;
-	}
-	
-	/**
 	 * カスタムプロパティ
 	 */
 	@Override
 	public void setProperties(Map<String, Object> properties) {
 		if (properties.containsKey("useEnergy")) {
-			this.useEnergy = parseFloat(properties.get("useEnergy"), this.useEnergy);
+			this.useEnergy = JBPlusHelper.parseFloat(properties.get("useEnergy"), this.useEnergy);
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package firis.jbplus.common.action;
 
+import firis.jbplus.common.helper.JBPlusHelper;
 import jp.mc.ancientred.jointblock.api.IJBEntityState;
 import jp.mc.ancientred.jointblock.api.IJBJointParameterHolder;
 import jp.mc.ancientred.jointblock.api.IJBVectorTransformer;
@@ -74,27 +75,7 @@ public class JBPHarvesterAction extends JBPBlockActionBase {
 			world.destroyBlock(actionPos, false);
 
 			for (ItemStack dropStack : drops) {
-				// とりあえずワークインベントリに突っ込む
-				for (int slot = 0; slot < 18 && !dropStack.isEmpty(); slot++) {
-					ItemStack stack = inventory.getStackInSlot(slot);
-					if (stack.isEmpty()) {
-						// 空の場合はそのまま設定
-						inventory.setInventorySlotContents(slot, dropStack.copy());
-						dropStack.shrink(dropStack.getCount());
-					} else if (ItemStack.areItemsEqual(stack, dropStack)) {
-						// アイテムが一致する場合は重ねる
-						if (stack.getCount() + dropStack.getCount() <= stack.getMaxStackSize()) {
-							stack.grow(dropStack.getCount());
-							dropStack.shrink(dropStack.getCount());
-							inventory.setInventorySlotContents(slot, stack);
-						} else {
-							int shrink = stack.getMaxStackSize() - stack.getCount();
-							stack.grow(shrink);
-							dropStack.shrink(dropStack.getCount());
-							inventory.setInventorySlotContents(slot, stack);
-						}
-					}
-				}
+				dropStack = JBPlusHelper.insertItemStackToInteractInventory(inventory, dropStack);
 				if (!dropStack.isEmpty()) {
 					// アイテムとしてEntityを生成する
 					InventoryHelper.spawnItemStack(world, actionPos.getX(), actionPos.getY(), actionPos.getX(),
