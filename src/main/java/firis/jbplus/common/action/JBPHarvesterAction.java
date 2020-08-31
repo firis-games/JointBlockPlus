@@ -26,7 +26,7 @@ public class JBPHarvesterAction extends JBPBlockActionBase {
 
 	@Override
 	public String getActionName() {
-		return "jbaction.harvest.name";
+		return "jbc.action.harvest.name";
 	}
 
 	/**

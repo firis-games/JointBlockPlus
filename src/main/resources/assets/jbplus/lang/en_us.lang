@@ -5,3 +5,7 @@ item.model_vacuum_f.name=Vacuum Model Type F
 tile.supply_device.name=Supply Device
 tile.supply_device.info=Fuel/Energy automatic supply device
 
+jbc.action.plant.name=Plant F
+jbc.action.harvest.name=Harvest F
+jbc.action.vacuum.name=Vacuum F
+

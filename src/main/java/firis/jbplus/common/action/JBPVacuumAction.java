@@ -53,7 +53,7 @@ public class JBPVacuumAction extends JBPBlockActionBase {
 
 	@Override
 	public String getActionName() {
-		return "jbaction.vacuum.name";
+		return "jbc.action.vacuum.name";
 	}
 
 	/**

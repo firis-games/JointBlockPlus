@@ -27,7 +27,7 @@ public class JBPPlantAction extends JBPBlockActionBase {
 	
 	@Override
 	public String getActionName() {
-		return "jbaction.plant.name";
+		return "jbc.action.plant.name";
 	}
 	
 	/**
