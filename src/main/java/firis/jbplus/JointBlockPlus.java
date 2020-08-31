@@ -11,12 +11,17 @@ import firis.jbplus.common.action.JBPHarvesterAction;
 import firis.jbplus.common.action.JBPPlantAction;
 import firis.jbplus.common.action.JBPVacuumAction;
 import firis.jbplus.common.action.factory.JBPlusActionFactory;
+import firis.jbplus.common.block.JBPBlockSupplyDevice;
 import firis.jbplus.common.item.JBPItemHarvester;
 import firis.jbplus.common.item.JBPItemPlanter;
 import firis.jbplus.common.item.JBPItemVacuum;
+import firis.jbplus.common.tileentity.JBPTileSupplyDevice;
 import jp.mc.ancientred.jointblock.config.JBConfig;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -28,6 +33,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -61,6 +67,11 @@ public class JointBlockPlus {
 //	public static IProxy proxy;
     
     @ObjectHolder(MODID)
+    public static class JBPBlocks {
+    	public final static Block SUPPLY_DEVICE = null;
+    }
+    
+    @ObjectHolder(MODID)
     public static class JBPItems {
     	public final static Item MODEL_PLANTER_F = null;
     	public final static Item MODEL_HARVESTER_F = null;
@@ -81,6 +92,10 @@ public class JointBlockPlus {
     	//描画設定を強制的に変更する
     	JBConfig.bypathEJRenderByStickyTileEntity = false;
     	
+    	//TileEntity登録
+    	GameRegistry.registerTileEntity(JBPTileSupplyDevice.class, 
+        		new ResourceLocation(MODID, "te_supply_device"));
+    	
     }
     
     @EventHandler
@@ -88,6 +103,21 @@ public class JointBlockPlus {
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {}
+    
+    
+    /**
+     * ブロックを登録
+     */
+    @SubscribeEvent
+    protected static void registerBlocks(RegistryEvent.Register<Block> event) {
+    	
+    	// 補給装置
+        event.getRegistry().register(
+                new JBPBlockSupplyDevice()
+                .setRegistryName(MODID, "supply_device")
+                .setUnlocalizedName("supply_device")
+        );
+    }
     
     /**
      * アイテム登録
@@ -110,6 +140,10 @@ public class JointBlockPlus {
     	event.getRegistry().register(new JBPItemVacuum()
     			.setRegistryName(MODID, "model_vacuum_f")
     			.setUnlocalizedName("model_vacuum_f"));
+    	
+    	//補給装置
+    	event.getRegistry().register(new ItemBlock(JBPBlocks.SUPPLY_DEVICE)
+    			.setRegistryName(MODID, "supply_device"));
     	
     }
     
@@ -135,6 +169,23 @@ public class JointBlockPlus {
     			}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				logger.info("registerModels Item error " + filed.getName());
+			}
+    	}
+    	
+    	//Blocksから自動でModelを登録する
+    	for (Field filed : JBPBlocks.class.getFields()) {
+    		try {
+    			int mod = filed.getModifiers();
+    			//final かつ static
+    			if (Modifier.isFinal(mod) && Modifier.isStatic(mod)) {
+    				if(filed.get(null) instanceof Block) {
+    					Block regBlock = (Block) filed.get(null);
+    					ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(regBlock), 0,
+    			    			new ModelResourceLocation(regBlock.getRegistryName(), "inventory"));
+    				}
+    			}
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				logger.info("registerModels Block error " + filed.getName());
 			}
     	}
 

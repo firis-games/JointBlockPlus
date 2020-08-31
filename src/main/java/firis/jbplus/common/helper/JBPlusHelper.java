@@ -1,5 +1,6 @@
 package firis.jbplus.common.helper;
 
+import jp.mc.ancientred.jointblock.entity.JointInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -79,7 +80,7 @@ public class JBPlusHelper {
 				} else {
 					int shrink = slotStack.getMaxStackSize() - slotStack.getCount();
 					slotStack.grow(shrink);
-					stack.shrink(stack.getCount());
+					stack.shrink(shrink);
 					inventory.setInventorySlotContents(slot, slotStack);
 				}
 			}
@@ -93,6 +94,14 @@ public class JBPlusHelper {
 	 */
 	public static ItemStack insertItemStackToInteractInventory(IInventory inventory, ItemStack stack) {
 		return insertItemStackToInventory(inventory, stack, 0, 18);
+	}
+	
+	/**
+	 * 燃料インベントリ
+	 * @return
+	 */
+	public static ItemStack insertItemStackToFuelInventory(IInventory inventory, ItemStack stack) {
+		return insertItemStackToInventory(inventory, stack, JointInventory.FUEL_SLOT_START, JointInventory.FUEL_SLOT_START + JointInventory.FUEL_SLOT_NUM);
 	}
 
 }

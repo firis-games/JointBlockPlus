@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "side": "jbplus:blocks/supply_device",
+        "end": "jbplus:blocks/supply_device_top"
+    }
+}

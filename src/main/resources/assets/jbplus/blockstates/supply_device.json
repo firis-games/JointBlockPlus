@@ -1,0 +1,5 @@
+{
+    "variants": {
+		"normal": { "model": "jbplus:supply_device" }
+    }
+}

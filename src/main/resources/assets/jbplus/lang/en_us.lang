@@ -2,4 +2,6 @@ item.model_planter_f.name=Planter Model Type F
 item.model_planter_f.info=Harvester Model Type F
 item.model_vacuum_f.name=Vacuum Model Type F
 
+tile.supply_device.name=Supply Device
+tile.supply_device.info=Fuel/Energy automatic supply device
 

@@ -2,3 +2,6 @@ item.model_planter_f.name=F型プランターモデル
 item.model_harvester_f.name=F型ハーベスターモデル
 item.model_vacuum_f.name=F型バキュームモデル
 
+tile.supply_device.name=補給装置
+tile.supply_device.info=燃料/エネルギー自動補給装置
+
