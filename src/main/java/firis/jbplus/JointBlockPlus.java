@@ -102,12 +102,18 @@ public class JointBlockPlus {
     public void init(FMLInitializationEvent event) {}
     
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {}
+    public void postInit(FMLPostInitializationEvent event) {
+    	
+    	//デフォルトモデルカタログ登録
+    	JointBlockPlusAPI.registerDefaultModelMerchantPackage(JBPItems.MODEL_PLANTER_F);
+    	JointBlockPlusAPI.registerDefaultModelMerchantPackage(JBPItems.MODEL_HARVESTER_F);
+    	JointBlockPlusAPI.registerDefaultModelMerchantPackage(JBPItems.MODEL_VACUUM_F);
+    	
+    }
     
     
     /**
-     * ブロックを登録
-     */
+     * ブロックを登録*/
     @SubscribeEvent
     protected static void registerBlocks(RegistryEvent.Register<Block> event) {
     	
