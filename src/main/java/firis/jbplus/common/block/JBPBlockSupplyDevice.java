@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import firis.jbplus.common.tileentity.JBPTileSupplyDevice;
-import jp.mc.ancientred.jbrobot.JBRobotMODContainer;
+import jp.mc.ancientred.jointblock.JBModContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -31,7 +31,7 @@ public class JBPBlockSupplyDevice extends AbstractBlockContainer {
 		super(Material.PISTON);
 		this.setHardness(5.0F);
 		this.setResistance(20.0F);
-		this.setCreativeTab(JBRobotMODContainer.jbRobotTab);
+		this.setCreativeTab(JBModContainer.jointBlockTab);
 	}
 
 	/**
