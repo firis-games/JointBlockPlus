@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "side": "jbplus:blocks/cargo_collection_device",
+        "end": "jbplus:blocks/cargo_collection_device_top"
+    }
+}

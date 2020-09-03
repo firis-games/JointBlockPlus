@@ -5,6 +5,9 @@ item.model_vacuum_f.name=F型バキュームモデル
 tile.supply_device.name=補給装置
 tile.supply_device.info=燃料/エネルギー自動補給装置
 
+tile.cargo_collection_device.name=集荷装置
+tile.cargo_collection_device.info=アイテムの自動回収装置
+
 jbc.action.plant.name=プラントF
 jbc.action.harvest.name=ハーベストF
 jbc.action.vacuum.name=バキュームF

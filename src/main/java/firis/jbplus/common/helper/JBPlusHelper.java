@@ -3,6 +3,7 @@ package firis.jbplus.common.helper;
 import jp.mc.ancientred.jointblock.entity.JointInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * ヘルパークラス
@@ -102,6 +103,23 @@ public class JBPlusHelper {
 	 */
 	public static ItemStack insertItemStackToFuelInventory(IInventory inventory, ItemStack stack) {
 		return insertItemStackToInventory(inventory, stack, JointInventory.FUEL_SLOT_START, JointInventory.FUEL_SLOT_START + JointInventory.FUEL_SLOT_NUM);
+	}
+	
+	
+	/**
+	 * IItemHandlerへアイテムを追加する
+	 * @param inventory
+	 * @param stack
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static ItemStack insertItemStackToIItemHandler(IItemHandler inventory, ItemStack stack) {
+		//指定スロットの間を走査する
+		for (int slot = 0; slot < inventory.getSlots() && !stack.isEmpty(); slot++) {
+			stack = inventory.insertItem(slot, stack, false);
+		}
+		return stack;
 	}
 
 }

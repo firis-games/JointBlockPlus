@@ -1,0 +1,5 @@
+{
+    "variants": {
+		"normal": { "model": "jbplus:cargo_collection_device" }
+    }
+}

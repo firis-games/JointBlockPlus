@@ -11,10 +11,12 @@ import firis.jbplus.common.action.JBPHarvesterAction;
 import firis.jbplus.common.action.JBPPlantAction;
 import firis.jbplus.common.action.JBPVacuumAction;
 import firis.jbplus.common.action.factory.JBPlusActionFactory;
+import firis.jbplus.common.block.JBPBlockCargoCollectionDevice;
 import firis.jbplus.common.block.JBPBlockSupplyDevice;
 import firis.jbplus.common.item.JBPItemHarvester;
 import firis.jbplus.common.item.JBPItemPlanter;
 import firis.jbplus.common.item.JBPItemVacuum;
+import firis.jbplus.common.tileentity.JBPTileCargoCollectionDevice;
 import firis.jbplus.common.tileentity.JBPTileSupplyDevice;
 import jp.mc.ancientred.jointblock.config.JBConfig;
 import net.minecraft.block.Block;
@@ -69,6 +71,7 @@ public class JointBlockPlus {
     @ObjectHolder(MODID)
     public static class JBPBlocks {
     	public final static Block SUPPLY_DEVICE = null;
+    	public final static Block CARGO_COLLECTION_DEVICE = null;
     }
     
     @ObjectHolder(MODID)
@@ -95,6 +98,8 @@ public class JointBlockPlus {
     	//TileEntity登録
     	GameRegistry.registerTileEntity(JBPTileSupplyDevice.class, 
         		new ResourceLocation(MODID, "te_supply_device"));
+    	GameRegistry.registerTileEntity(JBPTileCargoCollectionDevice.class, 
+        		new ResourceLocation(MODID, "te_cargo_collection_device"));
     	
     }
     
@@ -123,6 +128,12 @@ public class JointBlockPlus {
                 .setRegistryName(MODID, "supply_device")
                 .setUnlocalizedName("supply_device")
         );
+        // 集荷装置
+        event.getRegistry().register(
+                new JBPBlockCargoCollectionDevice()
+                .setRegistryName(MODID, "cargo_collection_device")
+                .setUnlocalizedName("cargo_collection_device")
+        );
     }
     
     /**
@@ -150,6 +161,10 @@ public class JointBlockPlus {
     	//補給装置
     	event.getRegistry().register(new ItemBlock(JBPBlocks.SUPPLY_DEVICE)
     			.setRegistryName(MODID, "supply_device"));
+    	
+    	//集荷装置
+    	event.getRegistry().register(new ItemBlock(JBPBlocks.CARGO_COLLECTION_DEVICE)
+    			.setRegistryName(MODID, "cargo_collection_device"));
     	
     }
     
