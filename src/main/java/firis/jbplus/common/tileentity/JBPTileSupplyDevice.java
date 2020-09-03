@@ -102,6 +102,9 @@ public class JBPTileSupplyDevice extends AbstractTileEntity implements ITickable
 		this.updateChargeEnergy();
 		
 		if (this.updateTick % 20 != 0) return;
+		
+		//赤石チェック
+		if (isRedStonePower()) return;
 
 		TileEntity tile = this.world.getTileEntity(this.getPos().up());
 		if (tile == null) return;
