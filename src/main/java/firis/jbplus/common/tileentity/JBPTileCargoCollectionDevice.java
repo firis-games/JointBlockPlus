@@ -2,6 +2,7 @@ package firis.jbplus.common.tileentity;
 
 import java.util.List;
 
+import firis.jbplus.common.config.JBPConfig;
 import firis.jbplus.common.helper.JBPlusHelper;
 import jp.mc.ancientred.jointblock.entity.EntityJointed;
 import net.minecraft.inventory.IInventory;
@@ -52,8 +53,9 @@ public class JBPTileCargoCollectionDevice extends AbstractTileEntity implements 
 		if (tile == null) return;
 
 		// 対象のJBEntityを取得
+		double range = JBPConfig.cfg_gen_device_block_range;
 		List<EntityJointed> jbEntityList = this.world.getEntitiesWithinAABB(EntityJointed.class,
-				(new AxisAlignedBB(this.pos)).grow(2.5D));
+				(new AxisAlignedBB(this.pos)).grow(range));
 		if (jbEntityList.size() == 0) return;
 
 		// アイテム回収

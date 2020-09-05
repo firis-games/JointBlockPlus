@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import firis.jbplus.common.capability.TileEntityEnergyStorage;
+import firis.jbplus.common.config.JBPConfig;
 import firis.jbplus.common.helper.JBPlusHelper;
 import jp.mc.ancientred.jointblock.entity.EntityJointed;
 import net.minecraft.inventory.IInventory;
@@ -106,19 +107,17 @@ public class JBPTileSupplyDevice extends AbstractTileEntity implements ITickable
 		//赤石チェック
 		if (isRedStonePower()) return;
 
-		TileEntity tile = this.world.getTileEntity(this.getPos().up());
-		if (tile == null) return;
-
 		// 対象のJBEntityを取得
+		double range = JBPConfig.cfg_gen_device_block_range;
 		List<EntityJointed> jbEntityList = this.world.getEntitiesWithinAABB(EntityJointed.class,
-				(new AxisAlignedBB(this.pos)).grow(2.5D));
+				(new AxisAlignedBB(this.pos)).grow(range));
 		if (jbEntityList.size() == 0) return;
 
 		// RFを取得する
 		this.updateEnergyToJBEntity(jbEntityList);
 
 		// 燃料スロットへ追加
-		this.updateFuelItemToJBEntity(tile, jbEntityList);
+		this.updateFuelItemToJBEntity(jbEntityList);
 
 	}
 
@@ -149,7 +148,7 @@ public class JBPTileSupplyDevice extends AbstractTileEntity implements ITickable
 	protected void updateEnergyToJBEntity(List<EntityJointed> jbEntityList) {
 		
 		// 1000RF = 1EN
-		int energyRF = 1000;
+		int energyRF = JBPConfig.cfg_gen_en_rate;
 
 		// 1回あたり10ENまで
 		float energyUnit = 10;
@@ -182,8 +181,11 @@ public class JBPTileSupplyDevice extends AbstractTileEntity implements ITickable
 	/**
 	 * 燃料スロットへの追加処理
 	 */
-	protected void updateFuelItemToJBEntity(TileEntity tile, List<EntityJointed> jbEntityList) {
+	protected void updateFuelItemToJBEntity(List<EntityJointed> jbEntityList) {
 
+		TileEntity tile = this.world.getTileEntity(this.getPos().up());
+		if (tile == null) return;
+		
 		// チェストを取得する
 		IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 		if (itemHandler != null) {

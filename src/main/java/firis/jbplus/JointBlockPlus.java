@@ -13,6 +13,7 @@ import firis.jbplus.common.action.JBPVacuumAction;
 import firis.jbplus.common.action.factory.JBPlusActionFactory;
 import firis.jbplus.common.block.JBPBlockCargoCollectionDevice;
 import firis.jbplus.common.block.JBPBlockSupplyDevice;
+import firis.jbplus.common.config.JBPConfig;
 import firis.jbplus.common.item.JBPItemHarvester;
 import firis.jbplus.common.item.JBPItemPlanter;
 import firis.jbplus.common.item.JBPItemVacuum;
@@ -84,6 +85,9 @@ public class JointBlockPlus {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	
+    	//Config初期化
+    	JBPConfig.init(event);
+    	
     	//ActionFactory初期化
     	JBPlusActionFactory.preInit();
     	
@@ -93,7 +97,7 @@ public class JointBlockPlus {
     	JointBlockPlusAPI.registerActionHandler("vacuum_f", JBPVacuumAction.class);
     	
     	//描画設定を強制的に変更する
-    	JBConfig.bypathEJRenderByStickyTileEntity = false;
+    	JBConfig.bypathEJRenderByStickyTileEntity = JBPConfig.cfg_gen_override_bypathEJRenderByStickyTileEntity;
     	
     	//TileEntity登録
     	GameRegistry.registerTileEntity(JBPTileSupplyDevice.class, 
