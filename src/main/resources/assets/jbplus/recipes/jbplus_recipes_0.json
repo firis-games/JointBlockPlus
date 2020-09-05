@@ -1,0 +1,29 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"iii",
+		"rcr",
+		"lul"
+	],
+	"key": {
+		"i": {
+			"item": "minecraft:iron_ingot"
+		},
+		"l": {
+			"item": "minecraft:coal",
+			"data": 32767
+		},
+		"r": {
+			"item": "minecraft:redstone"
+		},
+		"c": {
+			"item": "minecraft:chest"
+		},
+		"u": {
+			"item": "modj_jointblock:unitparts"
+		}
+	},
+	"result": {
+		"item": "jbplus:supply_device"
+	}
+}
